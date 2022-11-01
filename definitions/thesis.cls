@@ -33,9 +33,9 @@
 	toc=bibnumbered,
 	bibliography=numbered,
 	listof=totoc,
-    listof=entryprefix,
+	listof=entryprefix,
 	listof=numbered,
-    toc=sectionentrywithdots,
+	toc=sectionentrywithdots,
 ]{scrartcl}
 \RequirePackage{etoolbox}
 
