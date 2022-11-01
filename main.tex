@@ -1,0 +1,176 @@
+\documentclass[10pt, twoside, a4paper, titlepage]{thesis}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm, footskip=23pt, bindingoffset=1cm]{geometry}
+\usepackage[american]{babel}
+\usepackage{ifluatex}
+\ifluatex
+	\usepackage[no-math]{fontspec}
+\else
+	\usepackage[utf8]{inputenc}
+	\usepackage[T1]{fontenc}
+\fi
+\usepackage{standalone}
+\usepackage{abstract}
+\usepackage{caption}
+\usepackage[list=true,listformat=simple]{subcaption}
+\usepackage{xcolor}
+\usepackage{tabularray, makecell}
+\usepackage[normalem]{ulem}
+\usepackage{changepage, setspace}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+% Big-Roman Page numbering
+\usepackage{romanbarpagenumber}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{subfiles}
+\usepackage{csquotes}
+
+\usepackage{cleveref}
+
+%%%%%%%%%%%%%%%%%%%
+% Font
+% -- Remove or update if you want another font
+%%%%%%%%%%%%%%%%%%%
+\ifluatex
+	\setmainfont{baskervaldx}
+
+	%\usepackage[
+	%	math-style=ISO,
+	%	warnings-off={
+	%		mathtools-colon,
+	%		mathtools-overbracket
+	%	}
+	%]{unicode-math}
+	%\setmathfont{latinmodern-math.otf}
+	%\setmathfont{baskervaldx}
+	\usepackage[baskervaldx]{newtxmath}
+	%\setmathfont[range=up/{Latin,latin,Greek,greek}]{CMU Serif Upright Italic}
+\else
+	\usepackage{Baskervaldx}
+	\usepackage[baskervaldx]{newtxmath}
+\fi
+
+% Blind Text
+\usepackage{lipsum}
+
+
+%%%%%%%%%%%%%%%%%%%
+% Custom Definitions
+% -- You may remove these or add to these
+%%%%%%%%%%%%%%%%%%%
+\usepackage{tikzdef}
+
+\usepackage{ifthen}
+\newcommand\todo[1][]{%
+	\normalfont\texttt{[}%
+	\textcolor{red}{\textsc{Todo}}%
+	\ifthenelse{\equal{#1}{}}{}{:\ \textcolor{gray}{#1}}%
+	\texttt{]}%
+	\xspace%
+}
+\newcommand\missingcite{[\textcolor{red}{nocite}]}
+
+%%%%%%%%%%%%%%%%%%%
+% Meta information
+%%%%%%%%%%%%%%%%%%%
+\title{Here goes the title of my thesis}
+\author{Joe Everyman}
+\university{[University]}
+\institute{[Institute]}
+\doctype{[Thesis type]}
+\titlepagekeyvalues{
+	Advisor & \textcolor{red}{John Doe}\\
+	First Examiner & \textcolor{red}{John Doe}\\
+	Second Examiner & \textcolor{red}{John Doe}\\
+}
+\makeatletter
+\hypersetup{
+	pdfauthor=\@author,
+	pdftitle=\@title,
+}
+%% In case you need additional information (like the matriculation number) displayed
+\renewcommand{\insertauthor}{%
+    \@author{\\\normalfont Matriculation Number: XXXXXXXX}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%
+% Bibliography & Glossary
+%%%%%%%%%%%%%%%%%%%
+\bibliography{references}
+\loadglsentries{glossary}
+
+%%%%%%%%%%%%%%%%%%%
+% Externalize drawings
+%%%%%%%%%%%%%%%%%%%
+% Requires the folder tikz_graphics to exist
+%\usetikzlibrary{external}
+%\tikzexternalize[
+%	prefix=tikz_graphics/,
+%	optimize=true,
+%]
+
+\begin{document}
+	%%%%%%%%%%%%%%%
+	% FRONTMATTER %
+	%%%%%%%%%%%%%%%
+	\frontmatter
+	\maketitle
+	\null\vspace{5cm}
+	\begin{center}
+        \parbox{10.5cm}{%
+            \enquote{\itshape%
+                Optional introductory quote.%
+            }\par\vspace{1em}
+            
+            \begin{raggedleft}
+                --- Author Lastname, \textit{The title of the book} (XXXX)\par
+            \end{raggedleft}
+        }
+	\end{center}
+	\cleardoubleoddemptypage
+	\begin{abstract}
+		\subfile{0_abstract.tex}
+	\end{abstract}
+	\cleardoubleoddemptypage
+	\tableofcontents
+
+	%%%%%%%%%%%%%%%
+	% MAINMATTER  %
+	%%%%%%%%%%%%%%%
+	\mainmatter
+	\section{Introduction\label{sec:introduction}}
+	\subfile{1_introduction.tex}
+	\section{Preliminaries\label{sec:preliminaries}}
+	\subfile{2_preliminaries.tex}
+	\section{Related Work\label{sec:related_work}}
+	\subfile{3_related_work.tex}
+	\section{Proposed Method\label{sec:proposed_method}}
+	\subfile{4_methods.tex}
+	\section{Experiments\label{sec:experiments}}
+	\subfile{5_experiments.tex}
+	\section{Discussion\label{sec:discussion}}
+	\subfile{6_discussion.tex}
+	\section{Conclusion\label{sec:conclusion}}
+	\subfile{7_conclusion.tex}
+
+	%%%%%%%%%%%%%%%
+	% BACKMATTER  %
+	%%%%%%%%%%%%%%%
+	%\nocite{*}
+	\backmatter
+	\printbibliography
+	\listoffigures
+	\listoftables
+
+	\section{Declaration of Academic Integrity}
+	I hereby declare that I have composed the presented paper independently, on my own, and without any other resources
+	than the ones indicated. All thoughts taken directly or indirectly from external sources are properly denoted as
+	such. This paper has neither been previously submitted to another authority nor has it been published yet.
+	\vspace{4em}
+	\begin{center}
+		\begin{tblr}{X[35]X[65]}
+			\uline{[Place], \today\hfill} & \uline{\hfill\null}\\
+			(Place, Date) & (Signature)
+		\end{tblr}
+	\end{center}
+\end{document}
